@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)file:///Users/devcom/Downloads/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* Organic — design-system tokens and component classes. This file is the source of truth for the system's look; retune it here and see readme.md. */
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo:wght@400&family=Figtree:wght@400;600;700&display=swap');
+
+:root {
+  --color-bg: #f5ead8;
+  --color-surface: #ebddc5;
+  --color-text: #201e1d;
+  --color-accent: #c67139;
+  --color-accent-2: #7a8a5e;
+  --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
+
+  /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
+     same step of any role matches the others in visual value. */
+  --color-neutral-100: #f9f4ed;
+  --color-neutral-200: #eee7db;
+  --color-neutral-300: #dcd3c4;
+  --color-neutral-400: #c0b6a5;
+  --color-neutral-500: #a19786;
+  --color-neutral-600: #82796a;
+  --color-neutral-700: #645c50;
+  --color-neutral-800: #474238;
+  --color-neutral-900: #2e2b25;
+
+  --color-accent-100: #fff2eb;
+  --color-accent-200: #ffe1d0;
+  --color-accent-300: #ffc6a5;
+  --color-accent-400: #f6a06b;
+  --color-accent-500: #d67f48;
+  --color-accent-600: #b2622d;
+  --color-accent-700: #8c491a;
+  --color-accent-800: #643312;
+  --color-accent-900: #402310;
+
+  --color-accent-2-100: #f0fae1;
+  --color-accent-2-200: #e1eecc;
+  --color-accent-2-300: #ccdbb2;
+  --color-accent-2-400: #aebf92;
+  --color-accent-2-500: #8fa073;
+  --color-accent-2-600: #728157;
+  --color-accent-2-700: #56633f;
+  --color-accent-2-800: #3d472b;
+  --color-accent-2-900: #272e1b;
+
+  --font-heading: "Caprasimo", system-ui, sans-serif;
+  --font-heading-weight: 400;
+  --font-body: "Figtree", system-ui, sans-serif;
+
+  --space-1: 4.4px;
+  --space-2: 8.8px;
+  --space-3: 13.2px;
+  --space-4: 17.6px;
+  --space-6: 26.4px;
+  --space-8: 35.2px;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+
+  /* Elevation — derived from the ground: soft ink-tinted shadows on a
+     light theme, a hairline edge + ambient darkness on a dark one. */
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #2e2b25 14%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, #2e2b25 16%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, #2e2b25 22%, transparent);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); }
+
+.washed{filter:saturate(0.6) contrast(0.85) brightness(1.1) opacity(0.94)}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Components — built with the tokens above. Plain CSS
+   on plain HTML: no JavaScript, no build step. Each class is documented in
+   readme.md and demonstrated in foundations/ and components/.
+   ══════════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-size: 15px; line-height: 1.55; font-weight: 400; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 var(--space-2);
+}
+h1 { font-size: 42px; }
+h2 { font-size: 32px; }
+h3 { font-size: 25px; }
+h4 { font-size: 20px; }
+h5 { font-size: 16px; }
+h6 { font-size: 13px; }
+h6 { letter-spacing: 0.08em; text-transform: uppercase; }
+p { margin: 0 0 var(--space-3); }
+a { color: var(--color-accent); text-underline-offset: 3px; }
+img { display: block; max-width: 100%; }
+figure { margin: 0; }
+figcaption {
+  font-size: 11px; margin-top: var(--space-1);
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+.text-muted { color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+/* — rules — */
+.hr {
+  height: 1px; border: 0; margin: var(--space-4) 0;
+  background: var(--color-divider);
+}
+
+/* — buttons — */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; text-decoration: none;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 14px; line-height: 1.2; color: var(--color-text); /* matches the .input's 14px —
+     the pair sits side by side in sign-up rows */
+  background: transparent; border: 1px solid transparent;
+  padding: var(--space-2) calc(var(--space-3) * 1.2);
+  border-radius: var(--radius-md);
+}
+.btn svg { display: block; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { background: var(--color-accent); color: var(--color-bg); }
+.btn-primary:hover { background: var(--color-accent-600); }
+.btn-primary:active { background: var(--color-accent-700); }
+.btn-secondary { border-color: var(--color-divider); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
+.btn-ghost { color: var(--color-accent); padding-inline: var(--space-1); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+.btn-ghost:active { background: color-mix(in srgb, var(--color-accent) 18%, transparent); }
+.btn-icon { width: 36px; height: 36px; padding: 0; }
+.btn-block { width: 100%; margin-top: var(--space-2); }
+
+/* — forms — */
+.field > label {
+  display: block; font-size: 12px; margin-bottom: 5px;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.input {
+  width: 100%; min-height: 36px; padding: 6px 10px; font: inherit;
+  font-size: 14px; color: var(--color-text); caret-color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+.input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
+textarea.input { min-height: 90px; resize: vertical; }
+.radio { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; }
+.radio input, .seg-opt input {
+  position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;
+}
+.radio .dot {
+  width: 16px; height: 16px; flex: none; border-radius: 50%;
+  border: 1.5px solid var(--color-divider);
+}
+.radio:hover .dot { border-color: var(--color-accent); }
+.radio input:checked + .dot {
+  border-color: var(--color-accent); background: var(--color-accent);
+  box-shadow: inset 0 0 0 4px var(--color-bg);
+}
+.radio input:focus-visible + .dot { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.seg {
+  display: inline-flex; overflow: hidden;
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+.seg-opt {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 12px; font-size: 13px; cursor: pointer;
+}
+.seg-opt + .seg-opt { border-left: 1px solid var(--color-divider); }
+.seg-opt:has(input:checked) { background: var(--color-accent); color: var(--color-bg); }
+.seg-opt:not(:has(input:checked)):hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.seg-opt:has(input:focus-visible) { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+
+/* — cards — */
+.card {
+  display: flex; flex-direction: column; gap: var(--space-2);
+  padding: var(--space-3); border-radius: var(--radius-md); background: var(--color-surface);
+}
+.card-kicker { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); }
+.card-title {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 17px; line-height: 1.2;
+}
+.card-body { margin: 0; font-size: 13px; opacity: 0.8; flex: 1; }
+.card-meta {
+  display: flex; align-items: center; gap: 6px; font-size: 11px;
+  color: color-mix(in srgb, var(--color-text) 50%, transparent);
+}
+.elev-sm { box-shadow: var(--shadow-sm); }
+.elev-md { box-shadow: var(--shadow-md); }
+.elev-lg { box-shadow: var(--shadow-lg); }
+
+/* — tags — */
+.tag {
+  display: inline-flex; align-items: center; font-size: 11px;
+  letter-spacing: 0.02em; padding: 3px 10px;
+  border-radius: calc(var(--radius-md) * 0.75);
+}
+.tag-accent { background: var(--color-accent-100); color: var(--color-accent-800); }
+.tag-accent-2 { background: var(--color-accent-2-100); color: var(--color-accent-2-800); }
+.tag-neutral { background: var(--color-neutral-100); color: var(--color-neutral-800); }
+.tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent); }
+
+/* — navigation — */
+.nav {
+  display: flex; align-items: center; gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: none;
+}
+.nav-brand {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 18px; margin-right: auto;
+}
+.nav a { color: inherit; text-decoration: none; font-size: 14px; }
+.nav a:hover, .nav a[aria-current='page'] { color: var(--color-accent); }
+
+/* — tables — */
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th {
+  text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+  padding: var(--space-2); border-bottom: 1px solid var(--color-divider);
+}
+.table td {
+  padding: var(--space-2);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+}
+.table tbody tr:hover { background: color-mix(in srgb, var(--color-text) 4%, transparent); }
+
+/* — dialog — */
+.dialog-backdrop {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--color-neutral-900) 50%, transparent);
+}
+.dialog {
+  width: min(440px, 100%); display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-4); border-radius: var(--radius-lg);
+  background: var(--color-surface); box-shadow: var(--shadow-lg);
+}
+.dialog-title {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 20px;
+}
+.dialog-body { font-size: 14px; opacity: 0.85; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-2); }
+
+/* — rounded frame: everything softens, small controls go pill — */
+.card, .dialog { border-radius: calc(var(--radius-lg) * 1.15); }
+.btn, .tag, .seg, .input { border-radius: 999px; }
+.input { padding-inline: 14px; }
+</style>
+<title>Tiny Empire: Tactical Clash — Build, Battle, Conquer</title>
+<meta name="description" content="Build your empire, gather resources, and command troops to victory. Tiny Empire: Tactical Clash — free on Google Play.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tiny Empire: Tactical Clash">
+<meta property="og:description" content="Build your empire, gather resources, and command troops to victory. Free on Google Play.">
+<meta property="og:image" content="https://play-lh.googleusercontent.com/Z9Qm8XJ7was_SyHmPzlIsuNs2ShmpxZ_ZIKC-tuBn2FyRQBTzwbgoNHIM7io3XdxfTdLtc12fu5HjrnqkPi3=s512">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tiny Empire: Tactical Clash">
+<meta name="twitter:description" content="Build your empire, gather resources, and command troops to victory.">
+<meta name="twitter:image" content="https://play-lh.googleusercontent.com/mA5AGszTC9ahQ8678lE5zlkPHxsb4qByd7pFTsjGWR_ODoOKP5oYdRvvucenLCi5_pFa5wOPpvgPalTc3M5Ym8Y=w1200">
+<link rel="icon" href="./index_files/unnamed.png">
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; text-wrap: pretty; overflow-x: clip; }
+  a { color: var(--color-accent-700); text-decoration: none; }
+  a:hover { color: var(--color-accent-800); text-decoration: underline; }
+  .shots::-webkit-scrollbar { height: 8px; }
+  .shots::-webkit-scrollbar-thumb { background: var(--color-accent-200); border-radius: 999px; }
+  .shots::-webkit-scrollbar-track { background: transparent; }
+  @media (max-width: 600px) { .navlinks { display: none !important; } }
+  .lift { box-shadow: var(--shadow-md); transition: transform 160ms ease, box-shadow 160ms ease; }
+  .lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .lift:active { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+  .cta { box-shadow: var(--shadow-lg); transition: transform 180ms ease, box-shadow 180ms ease; }
+  .cta:hover { transform: translateY(-5px); box-shadow: 0 18px 34px -10px rgba(32, 30, 29, 0.42), 0 6px 14px -6px rgba(32, 30, 29, 0.28); }
+  .cta:active { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  @media (prefers-reduced-motion: reduce) { .cta { transition: none; } .cta:hover, .cta:active { transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .lift { transition: none; } .lift:hover, .lift:active { transform: none; } }
+</style>
+</head>
+<body>
+<div style="background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh; padding-bottom: 8px;">
+
+  <nav class="nav" style="padding-inline: max(24px, calc((100% - 1160px) / 2 + 24px)); gap: 20px;">
+    <img src="./index_files/unnamed.png" alt="Tiny Empire icon" width="34" height="34" style="border-radius: 10px; display: block;">
+    <span class="nav-brand">Tiny Empire</span>
+    <span class="navlinks" style="display: flex; gap: 22px; align-items: center; font-size: 14px; font-weight: 600;">
+      <a href="file:///Users/devcom/Downloads/index.html#features" style="color: var(--color-text);">Features</a>
+      <a href="file:///Users/devcom/Downloads/index.html#screens" style="color: var(--color-text);">Screens</a>
+      <a href="file:///Users/devcom/Downloads/index.html#trailer" style="color: var(--color-text);">Trailer</a>
+      <a href="file:///Users/devcom/Downloads/index.html#share" style="color: var(--color-text);">Share</a>
+    </span>
+    <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.gaobum.tinyempires.tinyempires" target="_blank" rel="noopener">Play free</a>
+  </nav>
+
+  <div style="max-width: 1160px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 24px);">
+
+    <section style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(32px, 5vw, 72px); align-items: center; padding: clamp(40px, 7vw, 84px) 0 clamp(36px, 5vw, 64px);">
+      <div style="position: absolute; right: -140px; top: -200px; width: 380px; height: 380px; border-radius: 50%; background: var(--color-accent-2-200); z-index: -1; pointer-events: none;"></div>
+      <div>
+        <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 18px;">Strategy · Free to play · Rated 3+</span>
+        <h1 style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: clamp(38px, 5.4vw, 70px); line-height: 1.07; letter-spacing: -0.01em; margin: 0 0 22px; margin-left: -0.028em;">
+          <span style="display: block;">One patch of land.</span>
+          <span style="display: block; color: var(--color-accent-700);">One rising empire.</span>
+        </h1>
+        <p style="font-size: 17px; line-height: 1.65; max-width: 48ch; margin: 0 0 28px; color: var(--color-neutral-800);">Gather meat, wood, gold and stone. Raise villagers into swordsmen, archers and mages. Advance through the eras, forge alliances — or break them — and command your army to victory.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: stretch; max-width: 660px;">
+          <a class="btn btn-primary cta" href="https://play.google.com/store/apps/details?id=com.gaobum.tinyempires.tinyempires" target="_blank" rel="noopener" style="min-height: 58px; padding-inline: 26px; font-size: 16.5px; gap: 12px; color: var(--color-neutral-100); flex: 1 1 290px; max-width: 320px;">
+            <span style="display: grid; place-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--color-neutral-100); flex: 0 0 auto;"><svg width="25" height="25" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.1 2.6a1.6 1.6 0 0 0-.5 1.2v16.4c0 .5.2.9.5 1.2l9-9.4z" fill="#2196f3"></path><path d="M4.1 2.6 13.1 12l3.5-3.1L6.3 2.7a1.7 1.7 0 0 0-2.2-.1z" fill="#00c853"></path><path d="M4.1 21.4a1.7 1.7 0 0 0 2.2.1l10.3-6.4L13.1 12z" fill="#ea4335"></path><path d="M16.6 8.9 13.1 12l3.5 3.1 3.6-2.1c.8-.5.8-1.5 0-2z" fill="#ffc400"></path></svg></span>
+            Get it on Google Play
+          </a>
+          <span class="btn" aria-disabled="true" style="min-height: 58px; padding-inline: 26px; font-size: 16.5px; gap: 12px; cursor: default; background: var(--color-neutral-300); color: var(--color-neutral-800); border: 0; box-shadow: none; opacity: 0.6; flex: 1 1 290px; max-width: 320px;">
+            <span style="display: grid; place-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--color-neutral-100); flex: 0 0 auto;"><svg width="19" height="19" viewBox="0 0 24 24" fill="var(--color-neutral-800)" aria-hidden="true"><path d="M17.05 12.04c-.03-2.35 1.92-3.48 2-3.53-1.09-1.6-2.79-1.82-3.39-1.84-1.44-.15-2.81.85-3.54.85-.74 0-1.86-.83-3.06-.81-1.57.02-3.02.91-3.83 2.32-1.63 2.83-.42 7.02 1.17 9.32.78 1.12 1.71 2.38 2.93 2.33 1.17-.05 1.62-.76 3.04-.76 1.41 0 1.81.76 3.05.74 1.26-.02 2.06-1.15 2.83-2.28.89-1.3 1.26-2.56 1.28-2.62-.03-.01-2.45-.94-2.48-3.72"></path><path d="M14.7 4.86c.64-.78 1.07-1.86.95-2.94-.95.04-2.1.63-2.76 1.41-.59.69-1.11 1.79-.97 2.85 1.06.08 2.14-.54 2.78-1.32"></path></svg></span>
+            App Store — coming soon
+          </span>
+        </div>
+        <p style="font-size: 13.5px; line-height: 1.6; margin: 16px 0 0; color: var(--color-neutral-700); min-height: 1.6em;"><span id="device-note">Android 7.0 and up · free to play · rated 3+ on Google Play.</span></p>
+      </div>
+      <figure style="margin: 0; border-radius: calc(2 * var(--radius-lg)); overflow: hidden; box-shadow: var(--shadow-lg);">
+        <img src="./index_files/unnamed(1).png" alt="Tiny Empire gameplay: a village gathering resources" style="display: block; width: 100%; height: auto;">
+      </figure>
+    </section>
+
+    <section aria-label="At a glance" style="display: flex; flex-wrap: wrap; gap: clamp(14px, 2.5vw, 28px); padding: clamp(8px, 2vw, 20px) 0 clamp(32px, 5vw, 56px);">
+      <div style="flex: 1 1 160px; background: var(--color-accent-100); border-radius: var(--radius-lg); padding: 22px 24px;">
+        <p style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 34px; line-height: 1.1; margin: 0 0 8px; color: var(--color-accent-700);">4</p>
+        <p style="font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; margin: 0; color: var(--color-neutral-800);">Resources to master</p>
+      </div>
+      <div style="flex: 1 1 160px; background: var(--color-accent-2-100); border-radius: var(--radius-lg); padding: 22px 24px;">
+        <p style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 34px; line-height: 1.1; margin: 0 0 8px; color: var(--color-accent-2-700);">5</p>
+        <p style="font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; margin: 0; color: var(--color-neutral-800);">Unit types to command</p>
+      </div>
+      <div style="flex: 1 1 160px; background: var(--color-accent-200); border-radius: var(--radius-lg); padding: 22px 24px;">
+        <p style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 34px; line-height: 1.1; margin: 0 0 8px; color: var(--color-accent-700);">∞</p>
+        <p style="font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; margin: 0; color: var(--color-neutral-800);">Eras to climb</p>
+      </div>
+      <div style="flex: 1 1 160px; background: var(--color-accent-2-200); border-radius: var(--radius-lg); padding: 22px 24px;">
+        <p style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 34px; line-height: 1.1; margin: 0 0 8px; color: var(--color-accent-2-800);">Free</p>
+        <p style="font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; margin: 0; color: var(--color-neutral-800);">No data collected</p>
+      </div>
+    </section>
+
+    <section id="features" style="padding: clamp(32px, 5vw, 64px) 0 clamp(24px, 4vw, 48px);">
+      <span style="display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 14px;">How you conquer</span>
+      <h2 style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: clamp(28px, 3.4vw, 42px); line-height: 1.12; margin: 0 0 clamp(28px, 4vw, 48px); max-width: 24ch;">Every decision shapes the kingdom</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(18px, 2.5vw, 30px);">
+        <div class="card elev-sm" style="padding: 28px;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--color-accent-200); display: grid; place-content: center; margin-bottom: 18px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-800)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 3.5 21 10l-3 3-6.5-6.5z"></path><path d="M11.5 6.5 4 14v6h6l7.5-7.5"></path></svg>
+          </div>
+          <h3 style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 21px; line-height: 1.2; margin: 0 0 10px;">Gather &amp; build</h3>
+          <p style="font-size: 15px; line-height: 1.65; margin: 0; color: var(--color-neutral-800);">Start with hardworking villagers. Harvest meat, wood, gold and stone, then turn an economy into houses, military camps and walls that hold.</p>
+        </div>
+        <div class="card elev-sm" style="padding: 28px;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--color-accent-2-200); display: grid; place-content: center; margin-bottom: 18px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-2-800)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v17"></path><path d="M6 9.5 12 3.5l6 6"></path><path d="M5 20.5h14"></path></svg>
+          </div>
+          <h3 style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 21px; line-height: 1.2; margin: 0 0 10px;">Advance the era</h3>
+          <p style="font-size: 15px; line-height: 1.65; margin: 0; color: var(--color-neutral-800);">Never stop evolving. Bank enough resources to upgrade your age and unlock advanced technology, grander buildings and elite combat units.</p>
+        </div>
+        <div class="card elev-sm" style="padding: 28px;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--color-accent-200); display: grid; place-content: center; margin-bottom: 18px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-800)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 4.5l10 10"></path><path d="M19.5 4.5l-10 10"></path><path d="M7 17.5l-2.5 2"></path><path d="M17 17.5l2.5 2"></path></svg>
+          </div>
+          <h3 style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 21px; line-height: 1.2; margin: 0 0 10px;">Command the line</h3>
+          <p style="font-size: 15px; line-height: 1.65; margin: 0; color: var(--color-neutral-800);">Swordsmen and spearmen hold the front. Archers rain fire from behind. Mages turn a losing field. Victory belongs to the better plan.</p>
+        </div>
+        <div class="card elev-sm" style="padding: 28px;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--color-accent-2-200); display: grid; place-content: center; margin-bottom: 18px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-2-800)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3.5"></circle><circle cx="16.5" cy="15.5" r="3.5"></circle><path d="M10.5 10.5l3.5 3"></path></svg>
+          </div>
+          <h3 style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 21px; line-height: 1.2; margin: 0 0 10px;">Ally or crush</h3>
+          <p style="font-size: 15px; line-height: 1.65; margin: 0; color: var(--color-neutral-800);">War is not only brute force. Choose allies for strategic advantage, then launch the attack that rewrites the map in your name.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="screens" style="padding: clamp(32px, 5vw, 64px) 0 clamp(24px, 4vw, 40px);">
+      <span style="display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 14px;">From the field</span>
+      <h2 style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: clamp(28px, 3.4vw, 42px); line-height: 1.12; margin: 0 0 8px; max-width: 24ch;">Screens from the campaign</h2>
+      <p style="font-size: 15px; line-height: 1.65; margin: 0 0 26px; color: var(--color-neutral-700);">Swipe or scroll sideways.</p>
+    </section>
+  </div>
+
+  <div class="shots" style="display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px clamp(20px, 5vw, 24px) 22px; scrollbar-width: thin; scrollbar-color: var(--color-accent-200) transparent;">
+    <img src="./index_files/unnamed(2).png" alt="Gameplay screenshot" loading="lazy" style="flex: 0 0 auto; width: clamp(280px, 62vw, 460px); height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); scroll-snap-align: center;">
+    <img src="./index_files/unnamed(3).png" alt="Gameplay screenshot" loading="lazy" style="flex: 0 0 auto; width: clamp(280px, 62vw, 460px); height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); scroll-snap-align: center;">
+    <img src="./index_files/unnamed(4).png" alt="Gameplay screenshot" loading="lazy" style="flex: 0 0 auto; width: clamp(280px, 62vw, 460px); height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); scroll-snap-align: center;">
+    <img src="./index_files/unnamed(5).png" alt="Gameplay screenshot" loading="lazy" style="flex: 0 0 auto; width: clamp(280px, 62vw, 460px); height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); scroll-snap-align: center;">
+    <img src="./index_files/unnamed(6).png" alt="Gameplay screenshot" loading="lazy" style="flex: 0 0 auto; width: clamp(280px, 62vw, 460px); height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); scroll-snap-align: center;">
+    <img src="./index_files/unnamed(7).png" alt="Gameplay screenshot" loading="lazy" style="flex: 0 0 auto; width: clamp(280px, 62vw, 460px); height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); scroll-snap-align: center;">
+    <img src="./index_files/unnamed(8).png" alt="Gameplay screenshot" loading="lazy" style="flex: 0 0 auto; width: clamp(280px, 62vw, 460px); height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); scroll-snap-align: center;">
+    <img src="./index_files/unnamed(9).png" alt="Gameplay screenshot" loading="lazy" style="flex: 0 0 auto; width: clamp(280px, 62vw, 460px); height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); scroll-snap-align: center;">
+  </div>
+
+  <div style="max-width: 1160px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 24px);">
+
+    <section id="trailer" style="padding: clamp(32px, 5vw, 64px) 0 clamp(12px, 2vw, 24px);">
+      <span style="display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 14px;">Watch it move</span>
+      <h2 style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: clamp(28px, 3.4vw, 42px); line-height: 1.12; margin: 0 0 26px; max-width: 24ch;">The trailer</h2>
+      <a class="lift" id="trailer-card" onclick="playTrailer(event)" href="https://www.youtube.com/watch?v=ohfxjrk8m2U" target="_blank" rel="noopener" style="position: relative; display: block; border-radius: calc(2 * var(--radius-lg)); overflow: hidden; background: var(--color-neutral-900); aspect-ratio: 16 / 9; max-width: 900px; text-decoration: none;">
+        <img src="./index_files/maxresdefault.jpg" alt="Tiny Empire: Tactical Clash trailer" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: cover;">
+        <span style="position: absolute; inset: 0; display: grid; place-content: center;">
+          <span style="display: grid; place-content: center; width: 86px; height: 86px; border-radius: 50%; background: var(--color-accent); box-shadow: var(--shadow-lg);">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="var(--color-neutral-100)" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"></path></svg>
+          </span>
+        </span>
+      </a>
+      <p style="font-size: 13.5px; line-height: 1.6; margin: 14px 0 0; color: var(--color-neutral-700);">Plays here. Trouble? <a href="https://www.youtube.com/watch?v=ohfxjrk8m2U" target="_blank" rel="noopener">Open it on YouTube</a>.</p>
+    </section>
+
+    <section id="share" style="padding: clamp(32px, 5vw, 56px) 0 clamp(28px, 4vw, 48px);">
+      <div style="background: var(--color-accent-2-100); border-radius: calc(2 * var(--radius-lg)); padding: clamp(28px, 4vw, 48px) clamp(24px, 4vw, 56px); display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: center; justify-content: space-between;">
+        <div style="flex: 1 1 320px;">
+          <h2 style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: clamp(26px, 3vw, 36px); line-height: 1.14; margin: 0 0 12px;">Recruit your rivals</h2>
+          <p style="font-size: 16px; line-height: 1.65; margin: 0 0 24px; max-width: 46ch; color: var(--color-neutral-800);">Send this page to a friend — it points them to the right store, whichever phone they carry.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+            <button type="button" class="btn btn-primary" onclick="copyLink()" style="min-height: 44px; padding-inline: 20px;">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="3"></rect><path d="M15 5.5A2.5 2.5 0 0 0 12.5 3h-7A2.5 2.5 0 0 0 3 5.5v7A2.5 2.5 0 0 0 5.5 15"></path></svg>
+              <span id="copy-label">Copy link</span>
+            </button>
+            <a class="btn btn-secondary" id="share-fb" href="https://www.facebook.com/sharer/sharer.php?u=file%3A%2F%2F%2FUsers%2Fdevcom%2FDownloads%2Findex.html" target="_blank" rel="noopener" style="min-height: 44px; padding-inline: 18px;">Facebook</a>
+            <a class="btn btn-secondary" id="share-x" href="https://twitter.com/intent/tweet?text=Build%20your%20empire%2C%20command%20troops%20to%20victory%20%E2%80%94%20Tiny%20Empire%3A%20Tactical%20Clash&amp;url=file%3A%2F%2F%2FUsers%2Fdevcom%2FDownloads%2Findex.html" target="_blank" rel="noopener" style="min-height: 44px; padding-inline: 18px;">X</a>
+            <a class="btn btn-secondary" id="share-zalo" href="https://zalo.me/share?u=file%3A%2F%2F%2FUsers%2Fdevcom%2FDownloads%2Findex.html" target="_blank" rel="noopener" style="min-height: 44px; padding-inline: 18px;">Zalo</a>
+          </div>
+        </div>
+        <figure style="margin: 0; background: var(--color-bg); border-radius: var(--radius-lg); padding: 16px; box-shadow: var(--shadow-sm); text-align: center;">
+          <img id="share-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&amp;margin=0&amp;data=file%3A%2F%2F%2FUsers%2Fdevcom%2FDownloads%2Findex.html" alt="QR code to this page" width="150" height="150" style="display: block; width: 150px; height: 150px;">
+          <figcaption style="font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; color: var(--color-neutral-700); margin-top: 12px;">Scan to open this page</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer style="padding: clamp(28px, 4vw, 48px) 0 clamp(36px, 5vw, 56px); display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: clamp(20px, 3vw, 40px); font-size: 14px; line-height: 1.7; color: var(--color-neutral-700);">
+      <div>
+        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px;">
+          <img src="./index_files/unnamed.png" alt="" width="36" height="36" style="border-radius: 11px; display: block;">
+          <span style="font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 17px; color: var(--color-text);">Tiny Empire</span>
+        </div>
+        <p style="margin: 0;">BumGao Studio</p>
+      </div>
+      <div>
+        <p style="margin: 0 0 6px; font-weight: 600; color: var(--color-text);">Get the game</p>
+        <p style="margin: 0;"><a href="https://play.google.com/store/apps/details?id=com.gaobum.tinyempires.tinyempires" target="_blank" rel="noopener">Google Play</a></p>
+        <p style="margin: 0;">App Store — coming soon</p>
+      </div>
+      <div>
+        <p style="margin: 0 0 6px; font-weight: 600; color: var(--color-text);">Support</p>
+        <p style="margin: 0;"><a href="mailto:vuthiyen1802@gmail.com">vuthiyen1802@gmail.com</a></p>
+        <p style="margin: 0;"><a href="https://bumgaostudio.github.io/" target="_blank" rel="noopener">bumgaostudio.github.io</a></p>
+      </div>
+      <div>
+        <p style="margin: 0 0 6px; font-weight: 600; color: var(--color-text);">Legal</p>
+        <p style="margin: 0;"><a href="https://docs.google.com/document/d/1Acolc1GZUxFHPrI-guOLIckp-Vn-iSUpO8F-qyHPa2w/edit?usp=sharing" target="_blank" rel="noopener">Privacy policy</a></p>
+        <p style="margin: 0;">Rated 3+ · No data collected</p>
+      </div>
+    </footer>
+  </div>
+</div>
+<script>
+function pageUrl() { var u = new URL(location.href); u.hash = ''; return u.href; }
+function playTrailer(e) {
+  if (e) e.preventDefault();
+  var card = document.getElementById('trailer-card');
+  if (!card) return;
+  card.innerHTML = '<iframe src="https://www.youtube.com/embed/ohfxjrk8m2U?autoplay=1&rel=0" title="Tiny Empire: Tactical Clash trailer" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="display:block;width:100%;height:100%;border:0"><\/iframe>';
+  card.removeAttribute('href');
+  card.removeAttribute('target');
+  card.style.cursor = 'default';
+}
+(function () {
+  var ua = navigator.userAgent || '', n = document.getElementById('device-note');
+  if (/iPhone|iPad|iPod/i.test(ua)) n.textContent = 'iPhone detected — the iOS build is on the way. Play on Android today, or send this page to a friend.';
+  else if (/Android/i.test(ua)) n.textContent = 'Android detected — tap above and you are two minutes from your first village.';
+
+  var enc = encodeURIComponent(pageUrl());
+  function set(id, href) { var el = document.getElementById(id); if (el) el.href = href; }
+  set('share-fb', 'https://www.facebook.com/sharer/sharer.php?u=' + enc);
+  set('share-x', 'https://twitter.com/intent/tweet?text=' + encodeURIComponent('Build your empire, command troops to victory — Tiny Empire: Tactical Clash') + '&url=' + enc);
+  set('share-zalo', 'https://zalo.me/share?u=' + enc);
+  var qr = document.getElementById('share-qr');
+  if (qr) qr.src = 'https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=0&data=' + enc;
+})();
+var copyTimer;
+function copyLink() {
+  var label = document.getElementById('copy-label');
+  var done = function () {
+    label.textContent = 'Link copied';
+    clearTimeout(copyTimer);
+    copyTimer = setTimeout(function () { label.textContent = 'Copy link'; }, 2000);
+  };
+  if (navigator.clipboard) { navigator.clipboard.writeText(pageUrl()).then(done, done); return; }
+  var t = document.createElement('textarea');
+  t.value = pageUrl(); document.body.appendChild(t); t.select();
+  try { document.execCommand('copy'); } catch (e) {}
+  t.remove(); done();
+}
+</script>
+
+
+</body></html>
